@@ -1,40 +1,41 @@
 import React from 'react';
-import axios from 'axios'
 import styled from 'styled-components'
 import { Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import NewUserPage from './NewUserPage'
 import Home from './Home'
+import lightwallet from 'eth-lightwallet'
 
 class App extends React.Component{
 	constructor(){
 		super()
-		this.state = {}
+		this.state = {
+			secretSeed: '',
+		}
 	}
 
 	componentDidMount(){
-		axios.get('/api/csv').then(res => {
-			this.setState({
-				data : res.data
-			})
-			console.log('res', res)
-		}).catch(err => {
-			this.setState({
-				data: null
-			})
-			console.log('err', err)
-		})
+
+	}
+
+	generateSeed = () => {
+		var secretSeed = lightwallet.keystore.generateRandomSeed();
+		this.setState({ secretSeed })
 	}
 
   render(){
+		const { secretSeed } = this.state
       return (
         <AppDiv>
-          <Route exact path="/new" component={NewUserPage}  />
-          <Route exact path="/" component={Home}  />
+					<button onClick={this.generateSeed}>Generate Seed</button>
+					<p>{secretSeed}</p>
         </AppDiv>
     );
   }
 }
+
+// <Route exact path="/" component={Home}  />
+// <Route exact path="/new" component={NewUserPage}  />
 
 export default withRouter(App)
 
