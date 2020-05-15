@@ -5,7 +5,7 @@
 	"homepage": "https://kerble.ski",
 	"dependencies": {
 		"axios": "^0.18.1",
-		"eth-lightwallet": "^4.0.0",
+		"bitcore-lib": "^8.20.2",
 		"express": "^4.17.1",
 		"express-http-proxy": "^1.5.1",
 		"react": "^16.8.6",

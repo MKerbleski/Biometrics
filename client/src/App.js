@@ -4,7 +4,27 @@ import { Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import NewUserPage from './NewUserPage'
 import Home from './Home'
-import lightwallet from 'eth-lightwallet'
+
+import bitcore from 'bitcore-lib'
+
+//
+// const privateKey = new bitcore.PrivateKey();
+// console.log('privateKey', privateKey)
+// const address = privateKey.toAddress();
+// console.log('address', address)
+
+const HDPrivateKey = bitcore.HDPrivateKey;
+
+const hdPrivateKey = new HDPrivateKey();
+const derivedByNumber = hdPrivateKey.deriveChild(1).deriveChild(2, true);
+const derivedByArgument = hdPrivateKey.deriveChild("m/1/2'");
+console.log("hdPrivateKey", hdPrivateKey)
+console.log("derivedByNumber", derivedByNumber)
+console.log("derivedByArgument", derivedByArgument)
+
+
+// obtain HDPublicKey
+var hdPublicKey = hdPrivateKey.hdPublicKey;
 
 class App extends React.Component{
 	constructor(){
@@ -19,7 +39,8 @@ class App extends React.Component{
 	}
 
 	generateSeed = () => {
-		var secretSeed = lightwallet.keystore.generateRandomSeed();
+		// var secretSeed = lightwallet.keystore.generateRandomSeed();
+		const secretSeed = new bitcore.PrivateKey()
 		this.setState({ secretSeed })
 	}
 
@@ -28,7 +49,7 @@ class App extends React.Component{
       return (
         <AppDiv>
 					<button onClick={this.generateSeed}>Generate Seed</button>
-					<p>{secretSeed}</p>
+					<p>secretSeed: {secretSeed}</p>
         </AppDiv>
     );
   }
