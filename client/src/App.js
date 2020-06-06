@@ -5,6 +5,7 @@ import { withRouter } from 'react-router'
 
 import Keys from './Keys'
 import AddressBook from './AddressBook'
+import NavBar from './navbar'
 
 class App extends React.Component{
 	constructor(){
@@ -16,8 +17,7 @@ class App extends React.Component{
   	render(){ 
 		return (
 			<AppDiv>
-				<Link to="/keys">Keys</Link>
-				<Link to="/addressBook">Address Book</Link>
+				<NavBar />
 				
 				<Route path="/keys" component={Keys} />
 				<Route path="/addressBook" component={AddressBook} />
