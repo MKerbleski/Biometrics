@@ -27,56 +27,94 @@ const bip = require('bip39')
 // obtain HDPublicKey
 // var hdPublicKey = hdPrivateKey.hdPublicKey
 // const mnemonic = bip39.generateMnemonic()
-const runSeedGenerator = async () => {
-	const mnemonic = bip.generateMnemonic(); //generates string
-	const seed = await bip.mnemonicToSeed(mnemonic); //creates seed buffer
 
-	const root = hdkey.fromMasterSeed(seed);
-	const masterPrivateKey = root.privateKey.toString('hex')
 
-	const addrNode = root.derive("m/44'/60'/0'/0/0"); //line 1
-	const pubKey = ethUtil.privateToPublic(addrNode._privateKey);
-	const addr = ethUtil.publicToAddress(pubKey).toString('hex');
-	// const address = ethUtil.toChecksumAddress(addr);
 
-	console.log("mnemonic", mnemonic)
-	console.log("seed", seed)
-	console.log("root", root)
-	console.log("masterPrivateKey", masterPrivateKey)
-	console.log("addrNode", addrNode)
-	console.log("pubKey", pubKey)
-	console.log("addr", addr)
-	// console.log("address", address)
 
-}
-runSeedGenerator()
 class App extends React.Component{
 	constructor(){
 		super()
 		this.state = {
 			secretSeed: '',
+			mnemonic: '[]',
 		}
 	}
 
 	generateSeed = () => {
 		// var secretSeed = lightwallet.keystore.generateRandomSeed();
-		const secretSeed = new bitcore.PrivateKey()
-		this.setState({ secretSeed })
+		// const secretSeed = new bitcore.PrivateKey()
+		// this.setState({ secretSeed })
+	}
+	componentDidMount(){
+		this.runSeedGenerator()
+	}
+
+	runSeedGenerator = async () => {
+		const mnemonic = bip.generateMnemonic(); //generates string
+		const seed = await bip.mnemonicToSeed(mnemonic); //creates seed buffer
+		const root = hdkey.fromMasterSeed(seed);
+	
+		const masterPrivateKey = root.privateKey.toString('hex')
+		const addrNode = root.derive("m/44'/60'/0'/0/0"); //line 1
+		const pubKey = ethUtil.privateToPublic(addrNode._privateKey);
+		const addr = ethUtil.publicToAddress(pubKey).toString('hex');
+		// const address = ethUtil.toChecksumAddress(addr);
+	
+		this.setState({
+			mnemonic,
+			seed,
+			root,
+			masterPrivateKey,
+			addrNode,
+			pubKey,
+			addr
+		})
+		console.log("mnemonic", mnemonic)
+		console.log("seed", seed)
+		console.log("root", root)
+		console.log("masterPrivateKey", masterPrivateKey)
+		console.log("addrNode", addrNode)
+		console.log("pubKey", pubKey)
+		console.log("addr", addr)
+		// console.log("address", address)
+	}
+
+	saveMenomicLocaly = () => {
+		const { 
+			mnemonic,
+		} = this.state
+		localStorage.setItem("mnemonic", mnemonic)
+	}
+
+	loadLocalKey = () => {
+		const mnemonic = localStorage.getItem("mnemonic")
+		this.setState({ mnemonic })
 	}
 
   	render(){
-		const { secretSeed } = this.state
+		const { 
+			mnemonic,
+			seed,
+			root,
+			masterPrivateKey,
+			addrNode,
+			pubKey,
+			addr,
+		} = this.state
      	 return (
 			<AppDiv>
-				{/* <p>hdPrivateKey: {hdPrivateKey} </p> */}
-				{/* <p>derivedByNumber: {derivedByNumber} </p> */}
-				{/* <p>derivedByArgument: {derivedByArgument} </p> */}
+				<p>mnemonic: {mnemonic} </p>
+				{/* <p>seed: {seed} </p>
+				<p>root: {root} </p> */}
+				<button onClick={this.runSeedGenerator}>New Key</button>
+				<button onClick={this.loadLocalKey}>Load Last Key</button>
+				<button onClick={this.saveMenomicLocaly}>Save Private Key</button>
 			</AppDiv>
 		);
 	}
 }
 
-export default withRouter(App)
+export default App
 
 const AppDiv = styled.div`
     /* border: 1px solid red; */
