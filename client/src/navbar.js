@@ -23,11 +23,12 @@ class NavBar extends React.Component{
 export default NavBar
 
 const NavBarDiv = styled.div`
-    /* border: 1px solid red; */
+    border: 1px solid black;
     box-sizing: border-box;
     max-width: 100vw;
+    width: 100%;
     color: black;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-around;
 `

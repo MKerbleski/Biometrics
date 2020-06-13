@@ -53,8 +53,14 @@ class Keys extends React.Component{
 		const seed = await bip.mnemonicToSeed(mnemonic); //creates seed buffer
 		const root = hdkey.fromMasterSeed(seed);
 	
-		const masterPrivateKey = root.privateKey.toString('hex')
-		const addrNode = root.derive("m/44'/60'/0'/0/0"); //line 1
+        const masterPrivateKey = root.privateKey.toString('hex')
+        // m / purpose' / coin_type' / account' / change / address_index
+        // purpose is 42 because it does not follow the bip 44 specifications 
+        // coin_type is domain heatlh | personal | cache 
+        // account is catagory | medications | vitals | diagonosis 
+        // change is sub-catagory HR | OxSat | Weight 
+        // index is sequential and 
+		const addrNode = root.derive("m/42'/60'/0'/0/0"); //line 1
 
 		const pubKey = ethUtil.privateToPublic(addrNode._privateKey);
 		const addr = ethUtil.publicToAddress(pubKey).toString('hex');

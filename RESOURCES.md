@@ -9,3 +9,17 @@ Sprout Care - Apple
 
 ## Private Prevenative care 
 Forward
+
+# Register coin 
+https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+
+# Path Levels
+https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
+
+# Mnemonic code converter
+https://iancoleman.io/bip39/
+
+# QR code 
+https://www.npmjs.com/package/qrcode
+
+
