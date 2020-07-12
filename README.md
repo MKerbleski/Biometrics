@@ -3,6 +3,7 @@ Give researchers and clinicians a large public dataset of symptoms and patients 
 
 https://medium.com/@harshagoli/so-you-want-to-build-an-ethereum-hd-wallet-cb2b7d7e4998
 
+ jupyter nbconvert --ExecutePreprocessor.timeout=None --to notebook --execute 7_fire_plots__3_.ipynb
 
 # outline
 

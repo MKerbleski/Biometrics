@@ -54,6 +54,7 @@ class Keys extends React.Component{
 		const root = hdkey.fromMasterSeed(seed);
 	
         const masterPrivateKey = root.privateKey.toString('hex')
+        // https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
         // m / purpose' / coin_type' / account' / change / address_index
         // purpose is 42 because it does not follow the bip 44 specifications 
         // coin_type is domain heatlh | personal | cache 
