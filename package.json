@@ -4,7 +4,7 @@
 	"private": true,
 	"homepage": "https://kerble.ski",
 	"dependencies": {
-		"axios": "^0.18.1",
+		"axios": "^0.21.1",
 		"bip39": "^3.0.2",
 		"bitcore-lib": "^8.20.3",
 		"ethereumjs-util": "^7.0.2",
