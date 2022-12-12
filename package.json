@@ -8,7 +8,7 @@
 		"bip39": "^3.0.2",
 		"bitcore-lib": "^8.20.3",
 		"ethereumjs-util": "^7.0.2",
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"express-http-proxy": "^1.6.0",
 		"hdkey": "^2.0.1",
 		"knex": "^0.21.1",
